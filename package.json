@@ -1,0 +1,16 @@
+{
+  "name": "ddd-example-ts",
+  "version": "1.0.0",
+  "description": "Use case example in ts",
+  "scripts": {},
+  "author": "Oscar Viciana <oviciana@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "@types/react": "^17.0.38",
+    "react": "^17.0.2"
+  }
+}
