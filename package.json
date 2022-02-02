@@ -2,7 +2,12 @@
   "name": "ddd-example-ts",
   "version": "1.0.0",
   "description": "Use case example in ts",
-  "scripts": {},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "author": "Oscar Viciana <oviciana@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -11,6 +16,8 @@
   },
   "dependencies": {
     "@types/react": "^17.0.38",
-    "react": "^17.0.2"
+    "next": "^12.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

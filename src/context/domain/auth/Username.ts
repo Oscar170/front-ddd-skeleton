@@ -23,7 +23,7 @@ const usernameValidations = [
     error: () => new UsernameLengthError(),
   },
   {
-    check: (username: string) => username.includes("@"),
+    check: (username: string) => !username.includes("@"),
     error: () => new UsernameWrongFormatError(),
   },
 ];

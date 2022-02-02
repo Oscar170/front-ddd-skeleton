@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { hasError } from "../../context/shared/useCase";
 import { container } from "../../context/workflow/index";
 import Show from "../../components/utils/Show";
@@ -22,7 +22,8 @@ const Login: React.FC = () => {
   const [error, setError] = useState(false);
   const [token, setToken] = useState<string>();
 
-  const handleSubmitLogin = async () => {
+  const handleSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const login = await container.get("login");
     const [err, token] = await login({
       username,
@@ -35,6 +36,7 @@ const Login: React.FC = () => {
       return;
     }
 
+    setError(false);
     setToken(token);
   };
 
