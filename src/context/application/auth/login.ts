@@ -11,26 +11,24 @@ type loginCommand = { username: string; password: string };
 export const login =
   ({ getLogin }: loginDeps): UseCase<loginCommand, Token> =>
   ({ username, password }) => {
-    const validUsername = Username(username);
-    const validPassword = Password(password);
+    const validations = Either.compress([
+      Username(username),
+      Password(password),
+    ]);
 
-    if (Either.isLeft(validUsername)) {
+    if (Either.isLeft(validations)) {
       return sanitizeUseCase(
-        Promise.reject(Either.getLeft(validUsername).message)
+        Promise.reject(Either.getLeft(validations).message)
       );
     }
 
-    if (Either.isLeft(validPassword)) {
-      return sanitizeUseCase(
-        Promise.reject(Either.getLeft(validPassword).message)
-      );
-    }
+    const [validUsername, validPassword] = Either.getRight(validations);
 
     return sanitizeUseCase(
       Either.fold(
         (err) => Promise.reject(err.message),
         (token) => Promise.resolve(token),
-        getLogin(Either.getRight(validUsername), Either.getRight(validPassword))
+        getLogin(validUsername, validPassword)
       )
     );
   };

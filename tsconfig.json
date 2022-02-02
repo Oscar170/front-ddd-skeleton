@@ -6,6 +6,7 @@
     "sourceMap": true,
     "strict": true,
     "jsx": "preserve",
+    "noEmit": true,
     "strictFunctionTypes": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
