@@ -12,6 +12,8 @@ declare global {
 }
 
 export const loginRepository: LoginRepository = () =>
-  Math.random() > 0.5
-    ? Either.of(crypto.randomUUID() as Token)
-    : Either.left(new InvalidUsernameOrPasswordError());
+  Promise.resolve(
+    Math.random() > 0.5
+      ? Either.of(crypto.randomUUID() as Token)
+      : Either.left(new InvalidUsernameOrPasswordError())
+  );

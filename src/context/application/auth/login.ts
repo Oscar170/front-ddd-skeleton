@@ -10,7 +10,7 @@ type loginCommand = { username: string; password: string };
 
 export const login =
   ({ getLogin }: loginDeps): UseCase<loginCommand, Token> =>
-  ({ username, password }) => {
+  async ({ username, password }) => {
     const validations = Either.compress([
       Username(username),
       Password(password),
@@ -28,7 +28,7 @@ export const login =
       Either.fold(
         (err) => Promise.reject(err.message),
         (token) => Promise.resolve(token),
-        getLogin(validUsername, validPassword)
+        await getLogin(validUsername, validPassword)
       )
     );
   };

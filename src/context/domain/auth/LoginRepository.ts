@@ -14,4 +14,4 @@ export class InvalidUsernameOrPasswordError extends Error {
 export type LoginRepository = (
   username: UsernameValue,
   password: PasswordValue
-) => Either<InvalidUsernameOrPasswordError, Token>;
+) => Promise<Either<InvalidUsernameOrPasswordError, Token>>;
