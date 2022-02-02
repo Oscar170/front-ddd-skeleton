@@ -21,7 +21,16 @@ export const Either = {
   getRight<A>(either: Right<A>): A {
     return either.value;
   },
-  getOrElse<E, A>(either: Either<E, A>, fn: (left: E) => A): A {
+  getOrElse<E, A>(fn: (left: E) => A, either: Either<E, A>): A {
     return Either.isLeft(either) ? fn(either.value) : either.value;
+  },
+  fold<E, A, B>(
+    onLeft: (e: E) => B,
+    onRight: (a: A) => B,
+    either: Either<E, A>
+  ): B {
+    return Either.isLeft(either)
+      ? onLeft(Either.getLeft(either))
+      : onRight(Either.getRight(either));
   },
 };

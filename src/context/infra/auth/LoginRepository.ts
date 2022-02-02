@@ -1,3 +1,17 @@
-import { LoginRepository } from "../../domain/auth/LoginRepository";
+import { Either } from "../../../utils/Either";
+import {
+  InvalidUsernameOrPasswordError,
+  LoginRepository,
+} from "../../domain/auth/LoginRepository";
+import { Token } from "../../domain/auth/Token";
 
-export const loginRepository: LoginRepository = () => Math.random() > 0.5;
+declare global {
+  interface Crypto {
+    randomUUID: () => string;
+  }
+}
+
+export const loginRepository: LoginRepository = () =>
+  Math.random() > 0.5
+    ? Either.of(crypto.randomUUID() as Token)
+    : Either.left(new InvalidUsernameOrPasswordError());

@@ -2,11 +2,10 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "es5",
-    "module": "esnext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "sourceMap": true,
     "strict": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "strictFunctionTypes": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
