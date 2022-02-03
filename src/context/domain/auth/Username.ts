@@ -1,17 +1,16 @@
+import { BaseError } from "../../../utils/BaseError";
 import { Brand } from "../../../utils/Brand";
 import { Either } from "../../../utils/Either";
 
 export type UsernameValue = Brand<string, "username">;
 
-export class UsernameLengthError extends Error {
-  eid!: Brand<string, "UsernameLengthError">;
+export class UsernameLengthError extends BaseError<"UsernameLengthError"> {
   constructor() {
     super("Username should have min lenght of 4.");
   }
 }
 
-export class UsernameWrongFormatError extends Error {
-  eid!: Brand<string, "UsernameWrongFormatError">;
+export class UsernameWrongFormatError extends BaseError<"UsernameWrongFormatError"> {
   constructor() {
     super("Username should have email fromat.");
   }

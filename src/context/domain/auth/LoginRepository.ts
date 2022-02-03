@@ -1,11 +1,10 @@
-import { Brand } from "../../../utils/Brand";
+import { BaseError } from "../../../utils/BaseError";
 import { Either } from "../../../utils/Either";
 import { PasswordValue } from "./Password";
 import { Token } from "./Token";
 import { UsernameValue } from "./Username";
 
-export class InvalidUsernameOrPasswordError extends Error {
-  eid!: Brand<string, "InvalidUsernameOrPasswordError">;
+export class InvalidUsernameOrPasswordError extends BaseError<"InvalidUsernameOrPasswordError"> {
   constructor() {
     super("Username or Password are invalid.");
   }
