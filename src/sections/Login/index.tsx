@@ -30,13 +30,12 @@ const Login: React.FC = () => {
       password,
     });
 
+    setError(Boolean(err));
     if (hasError(err, token)) {
       console.error(err);
-      setError(true);
       return;
     }
 
-    setError(false);
     setToken(token);
   };
 
