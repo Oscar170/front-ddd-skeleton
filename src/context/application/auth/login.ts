@@ -6,7 +6,7 @@ import { Password } from "../../domain/auth/Password";
 import { LoginRepository } from "../../domain/auth/LoginRepository";
 
 type loginDeps = { getLogin: LoginRepository };
-type loginCommand = { username: string; password: string };
+export type loginCommand = { username: string; password: string };
 
 export const login =
   ({ getLogin }: loginDeps): UseCase<loginCommand, Token> =>
