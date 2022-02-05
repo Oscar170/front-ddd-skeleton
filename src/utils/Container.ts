@@ -1,8 +1,8 @@
-export type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
-export type ImportToDefault<T extends Promise<{ default: Function }>> = Promise<
+type Fn = (...args: any) => any;
+export type ImportToDefault<T extends Promise<{ default: Fn }>> = Promise<
   Awaited<T>["default"]
 >;
-export type Module = () => Promise<{ default: Function }>;
+export type Module = () => Promise<{ default: Fn }>;
 export type ServicesShape = { [key: string]: Module };
 
 const Container = {

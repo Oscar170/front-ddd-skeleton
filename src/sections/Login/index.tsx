@@ -2,19 +2,7 @@ import React, { useState } from "react";
 import { hasError } from "../../context/shared/useCase";
 import { container } from "../../context/workflow/index";
 import Show from "../../components/utils/Show";
-
-function useInput(
-  defaultValue: string
-): [string, (e: React.ChangeEvent<HTMLInputElement>) => void] {
-  const [value, setValue] = useState(defaultValue);
-
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setValue(e.target.value);
-  };
-
-  return [value, handleChangeValue];
-}
+import { useInput } from "../../hooks/useInput";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useInput("");

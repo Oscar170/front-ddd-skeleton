@@ -8,7 +8,7 @@ import {
   emptyGetLoginMock,
   errorGetLoginMock,
   succesGetLoginMock,
-} from "../../infra/__mock__/LoginRepository";
+} from "../../infra/__mock__/LoginRepositoryMock";
 import {
   invalidFormatUsernameCommand,
   shortUsernameCommand,

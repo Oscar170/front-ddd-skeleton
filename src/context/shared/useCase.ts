@@ -1,8 +1,9 @@
 export type UseCaseError = [string, null];
 export type UseCaseSuccess<T> = [null, T];
+export type UseCaseResult<T> = UseCaseError | UseCaseSuccess<T>;
 export type UseCase<Params, Return> = Params extends null
-  ? () => Promise<UseCaseError | UseCaseSuccess<Return>>
-  : (params: Params) => Promise<UseCaseError | UseCaseSuccess<Return>>;
+  ? () => Promise<UseCaseResult<Return>>
+  : (params: Params) => Promise<UseCaseResult<Return>>;
 
 export const sanitizeUseCase = <T>(
   useCase: Promise<T>
