@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { hasError } from "../../context/shared/useCase";
-import { container } from "../../context/workflow/index";
 import Show from "../../components/utils/Show";
 import { useInput } from "../../hooks/useInput";
+import { useContainer } from "../../hooks/useContainer";
 
 const Login: React.FC = () => {
+  const container = useContainer();
   const [username, setUsername] = useInput("");
   const [password, setPassword] = useInput("");
   const [error, setError] = useState(false);
