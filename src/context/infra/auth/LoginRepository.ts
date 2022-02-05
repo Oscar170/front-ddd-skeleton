@@ -1,4 +1,4 @@
-import { Either } from "../../../utils/Either";
+import { Either } from "@/utils/Either";
 import {
   InvalidUsernameOrPasswordError,
   LoginRepository,

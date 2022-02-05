@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { hasError } from "../../context/shared/useCase";
-import Show from "../../components/utils/Show";
-import { useInput } from "../../hooks/useInput";
-import { useContainer } from "../../hooks/useContainer";
+import { hasError } from "@/context/shared/useCase";
+import Show from "@/components/utils/Show";
+import { useInput } from "@/hooks/useInput";
+import { useContainer } from "@/hooks/useContainer";
 
 const Login: React.FC = () => {
   const container = useContainer();

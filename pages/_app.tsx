@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
-import { ContainerProvider } from "../src/hooks/useContainer";
-import { container } from "../src/context/workflow";
+import { ContainerProvider } from "@/hooks/useContainer";
+import { container } from "@/context/workflow";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

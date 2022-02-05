@@ -1,9 +1,9 @@
-import { login } from "../../../src/context/application/auth/login";
-import { InvalidUsernameOrPasswordError } from "../../../src/context/domain/auth/LoginRepository";
+import { login } from "@/context/application/auth/login";
+import { InvalidUsernameOrPasswordError } from "@/context/domain/auth/LoginRepository";
 import {
   UsernameLengthError,
   UsernameWrongFormatError,
-} from "../../../src/context/domain/auth/Username";
+} from "@/context/domain/auth/Username";
 import {
   emptyGetLoginMock,
   errorGetLoginMock,

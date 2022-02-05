@@ -1,5 +1,5 @@
-import { Brand } from "../../../utils/Brand";
-import { Either } from "../../../utils/Either";
+import { Brand } from "@/utils/Brand";
+import { Either } from "@/utils/Either";
 
 export type PasswordValue = Brand<string, "password">;
 

@@ -1,4 +1,4 @@
-import Login from "../src/sections/Login";
+import Login from "@/sections/Login";
 
 const Home: React.FC = () => {
   return (

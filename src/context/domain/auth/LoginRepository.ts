@@ -1,5 +1,5 @@
-import { BaseError } from "../../../utils/BaseError";
-import { Either } from "../../../utils/Either";
+import { BaseError } from "@/utils/BaseError";
+import { Either } from "@/utils/Either";
 import { PasswordValue } from "./Password";
 import { Token } from "./Token";
 import { UsernameValue } from "./Username";

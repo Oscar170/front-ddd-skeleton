@@ -1,6 +1,6 @@
-import { BaseError } from "../../../utils/BaseError";
-import { Brand } from "../../../utils/Brand";
-import { Either } from "../../../utils/Either";
+import { BaseError } from "@/utils/BaseError";
+import { Brand } from "@/utils/Brand";
+import { Either } from "@/utils/Either";
 
 export type UsernameValue = Brand<string, "username">;
 

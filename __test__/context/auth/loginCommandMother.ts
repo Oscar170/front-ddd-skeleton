@@ -1,4 +1,4 @@
-import { loginCommand } from "../../../src/context/application/auth/login";
+import { loginCommand } from "@/context/application/auth/login";
 
 export const shortUsernameCommand = (): loginCommand => ({
   username: "som",

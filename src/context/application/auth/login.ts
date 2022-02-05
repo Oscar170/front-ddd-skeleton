@@ -1,4 +1,4 @@
-import { Either } from "../../../utils/Either";
+import { Either } from "@/utils/Either";
 import { sanitizeUseCase, UseCase } from "../../shared/useCase";
 import { Username } from "../../domain/auth/Username";
 import { Token } from "../../domain/auth/Token";

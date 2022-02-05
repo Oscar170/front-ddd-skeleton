@@ -1,6 +1,6 @@
-import { render } from "@testing-library/react";
-import Login from "../../../src/sections/Login";
+import { render } from "../../utils/render";
+import Login from "@/sections/Login";
 
-test.skip("Login should render", () => {
+test("Login should render", () => {
   render(<Login />);
 });
