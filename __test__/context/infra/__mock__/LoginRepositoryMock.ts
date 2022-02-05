@@ -1,9 +1,9 @@
-import { Token } from "../../../domain/auth/Token";
-import { Either } from "../../../../utils/Either";
+import { Token } from "../../../../src/context/domain/auth/Token";
+import { Either } from "../../../../src/utils/Either";
 import {
-  LoginRepository,
   InvalidUsernameOrPasswordError,
-} from "../../../domain/auth/LoginRepository";
+  LoginRepository,
+} from "../../../../src/context/domain/auth/LoginRepository";
 
 export const emptyGetLoginMock = (): LoginRepository => jest.fn();
 export const errorGetLoginMock = (): LoginRepository =>

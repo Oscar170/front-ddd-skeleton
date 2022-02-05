@@ -1,14 +1,14 @@
-import { login } from "../../../application/auth/login";
-import { InvalidUsernameOrPasswordError } from "../../../domain/auth/LoginRepository";
+import { login } from "../../../src/context/application/auth/login";
+import { InvalidUsernameOrPasswordError } from "../../../src/context/domain/auth/LoginRepository";
 import {
   UsernameLengthError,
   UsernameWrongFormatError,
-} from "../../../domain/auth/Username";
+} from "../../../src/context/domain/auth/Username";
 import {
   emptyGetLoginMock,
   errorGetLoginMock,
   succesGetLoginMock,
-} from "../../infra/__mock__/LoginRepositoryMock";
+} from "../infra/__mock__/LoginRepositoryMock";
 import {
   invalidFormatUsernameCommand,
   shortUsernameCommand,
