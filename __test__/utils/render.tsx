@@ -4,18 +4,24 @@ import { ContainerProvider } from "@/hooks/useContainer";
 import Container from "@/utils/Container";
 
 export const render = (
-  component: React.ReactElement,
+  ui: React.ReactElement,
   options: Omit<RenderOptions, "queries"> & {
     serviceContainer: AppContainer;
   } = {
     serviceContainer: Container.of({}),
   }
 ) => {
-  const { serviceContainer, ...testingLibraryOptions } = options;
-  return tlRender(
-    <ContainerProvider value={options.serviceContainer}>
-      {component}
-    </ContainerProvider>,
-    testingLibraryOptions
+  const {
+    serviceContainer,
+    wrapper: Wrapper = ({ children }) => children,
+    ...testingLibraryOptions
+  } = options;
+  const wrapper: React.FC = ({ children }) => (
+    <Wrapper>
+      <ContainerProvider value={options.serviceContainer}>
+        {children}
+      </ContainerProvider>
+    </Wrapper>
   );
+  return tlRender(ui, { ...testingLibraryOptions, wrapper });
 };

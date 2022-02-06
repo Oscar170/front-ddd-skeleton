@@ -31,16 +31,39 @@ const Login: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmitLogin}>
-        <input type="text" value={username} onChange={setUsername} />
-        <input type="password" value={password} onChange={setPassword} />
-        <input type="submit" value="LOGIN" />
+        <div>
+          <label htmlFor="username-field">Username</label>
+          <input
+            id="username-field"
+            type="text"
+            name="username"
+            value={username}
+            onChange={setUsername}
+          />
+        </div>
+        <div>
+          <label htmlFor="password-field">Password</label>
+          <input
+            id="password-field"
+            type="password"
+            name="password"
+            value={password}
+            onChange={setPassword}
+          />
+        </div>
+        <button type="submit">LOGIN</button>
       </form>
       <Show
         when={Boolean(token) || error}
-        fallback={<span>Waiting to login</span>}
+        fallback={<span data-testid="login-waiting">Waiting to login</span>}
       >
-        <Show when={!error} fallback={<span>Some unexpected error</span>}>
-          <span>Token: {token}</span>
+        <Show
+          when={!error}
+          fallback={
+            <span data-testid="login-error">Some unexpected error</span>
+          }
+        >
+          <span data-testid="login-success">Token: {token}</span>
         </Show>
       </Show>
     </>

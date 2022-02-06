@@ -5,6 +5,11 @@ export type ImportToDefault<T extends Promise<{ default: Fn }>> = Promise<
 export type Module = () => Promise<{ default: Fn }>;
 export type ServicesShape = { [key: string]: Module };
 
+export const toFakeImport =
+  <T extends Fn>(fn: T) =>
+  () =>
+    Promise.resolve({ default: fn });
+
 const Container = {
   of: <Services extends ServicesShape>(services: Services) => {
     return {
