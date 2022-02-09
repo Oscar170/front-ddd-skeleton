@@ -1,13 +1,22 @@
-name: Node CI
+name: Validate Code
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
-        run: npm ci
-      - name: Unit testing
-        run: npm run test:ci
+        run: make install
+
+      - name: Run the test
+        run: make test
