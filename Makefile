@@ -8,6 +8,13 @@ install:
 		$(node_image) \
 			npm install
 
+validate:
+	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \
+		--volume $(current-dir):/app \
+		--volume $(HOME)/.npm:/root/.npm \
+		$(node_image) \
+			npm run validate
+
 
 test:
 	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \

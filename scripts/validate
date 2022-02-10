@@ -1,0 +1,10 @@
+#!/bin/sh
+
+npx concurrently \
+  --kill-others-on-fail \
+  --prefix "[{name}]" \
+  --names "typecheck,lint,test" \
+  --prefix-colors "bgRed.bold.white,bgGreen.bold.white,bgBlue.bold.white" \
+    "npm run typecheck --silent" \
+    "npm run lint --silent" \
+    "npm run test --silent -- --watch=false"
