@@ -16,7 +16,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: make install
+        run: make install_ci
 
       - name: Run the typecheck/lint/test
         run: make validate
