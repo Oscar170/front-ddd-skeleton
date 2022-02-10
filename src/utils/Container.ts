@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Fn = (...args: any) => any;
+
 export type ImportToDefault<T extends Promise<{ default: Fn }>> = Promise<
   Awaited<T>["default"]
 >;

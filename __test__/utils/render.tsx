@@ -18,9 +18,7 @@ export const render = (
   } = options;
   const wrapper: React.FC = ({ children }) => (
     <Wrapper>
-      <ContainerProvider value={options.serviceContainer}>
-        {children}
-      </ContainerProvider>
+      <ContainerProvider value={serviceContainer}>{children}</ContainerProvider>
     </Wrapper>
   );
   return tlRender(ui, { ...testingLibraryOptions, wrapper });

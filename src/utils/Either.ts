@@ -7,6 +7,7 @@ export type Left<E> = { value: E; type: typeof LEFT };
 export type Right<A> = { value: A; type: typeof RIGHT };
 export type Either<E, A> = Left<E> | Right<A>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const compress: CompressEither = (eithers: any) => {
   const maybeLeft = eithers.find(Either.isLeft);
 
