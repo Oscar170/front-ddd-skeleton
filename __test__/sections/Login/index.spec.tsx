@@ -8,7 +8,7 @@ import {
   emptyGetLoginMock,
   errorGetLoginMock,
   succesGetLoginMock,
-} from "../../context/infra/__mock__/LoginRepositoryMock";
+} from "../../context/infra/__mock__/auth/LoginRepositoryMock";
 
 test("should render", async () => {
   render(<Login />);
