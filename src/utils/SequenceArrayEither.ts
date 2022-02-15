@@ -1,6 +1,6 @@
 import { Either } from "./Either";
 
-export type CompressEither = {
+export type Sequence = {
   (eithers: []): Either<never, []>;
   <B1, A1>(eithers: [Either<B1, A1>]): Either<B1, [A1]>;
   <B1, A1, B2, A2>(eithers: [Either<B1, A1>, Either<B2, A2>]): Either<

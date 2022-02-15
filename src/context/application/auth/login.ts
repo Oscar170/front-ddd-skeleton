@@ -10,20 +10,16 @@ export type loginCommand = { username: string; password: string };
 
 export const login = ({ getLogin }: loginDeps) =>
   UseCase<loginCommand, Token>(async ({ username, password }) => {
-    const validations = Either.compress([
-      Username(username),
-      Password(password),
-    ]);
+    const validations = Either.all([Username(username), Password(password)]);
 
     if (Either.isLeft(validations)) {
-      return Promise.reject(Either.getLeft(validations).message);
+      return Promise.reject(validations.getValue().message);
     }
 
-    const [validUsername, validPassword] = Either.getRight(validations);
+    const [validUsername, validPassword] = validations.getValue();
 
-    return Either.fold(
+    return (await getLogin(validUsername, validPassword)).fold(
       (err) => Promise.reject(err.message),
-      (token) => Promise.resolve(token),
-      await getLogin(validUsername, validPassword)
+      (token) => Promise.resolve(token)
     );
   });
