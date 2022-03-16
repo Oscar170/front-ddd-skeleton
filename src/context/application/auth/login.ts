@@ -5,10 +5,9 @@ import { Token } from "../../domain/auth/Token";
 import { Password } from "../../domain/auth/Password";
 import { LoginRepository } from "../../domain/auth/LoginRepository";
 
-type loginDeps = { getLogin: LoginRepository };
 export type loginCommand = { username: string; password: string };
 
-export const login = ({ getLogin }: loginDeps) =>
+export const login = (doLogin: LoginRepository) =>
   UseCase<loginCommand, Token>(async ({ username, password }) => {
     const validations = Either.all([Username(username), Password(password)]);
 
@@ -18,7 +17,7 @@ export const login = ({ getLogin }: loginDeps) =>
 
     const [validUsername, validPassword] = validations.getValue();
 
-    return (await getLogin(validUsername, validPassword)).fold(
+    return (await doLogin(validUsername, validPassword)).fold(
       (err) => Promise.reject(err.message),
       (token) => Promise.resolve(token)
     );

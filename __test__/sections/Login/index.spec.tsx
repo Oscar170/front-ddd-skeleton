@@ -17,7 +17,7 @@ test("should render", async () => {
 test("short username results in an error'", async () => {
   render(<Login />, {
     serviceContainer: Container.of({
-      login: toFakeImport(login({ getLogin: emptyGetLoginMock() })),
+      login: toFakeImport(login(emptyGetLoginMock())),
     }),
   });
 
@@ -32,7 +32,7 @@ test("short username results in an error'", async () => {
 test("username isn't mail format results in an error'", async () => {
   render(<Login />, {
     serviceContainer: Container.of({
-      login: toFakeImport(login({ getLogin: emptyGetLoginMock() })),
+      login: toFakeImport(login(emptyGetLoginMock())),
     }),
   });
 
@@ -47,7 +47,7 @@ test("username isn't mail format results in an error'", async () => {
 test("logging in without problems displays success message", async () => {
   render(<Login />, {
     serviceContainer: Container.of({
-      login: toFakeImport(login({ getLogin: succesGetLoginMock() })),
+      login: toFakeImport(login(succesGetLoginMock())),
     }),
   });
 
@@ -62,7 +62,7 @@ test("logging in without problems displays success message", async () => {
 test("logging in with problems displays success message", async () => {
   render(<Login />, {
     serviceContainer: Container.of({
-      login: toFakeImport(login({ getLogin: errorGetLoginMock() })),
+      login: toFakeImport(login(errorGetLoginMock())),
     }),
   });
 

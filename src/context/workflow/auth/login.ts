@@ -1,4 +1,4 @@
 import { login } from "../../application/auth/login";
 import { loginRepository } from "../../infra/auth/LoginRepository";
 
-export default login({ getLogin: loginRepository });
+export default login(loginRepository);

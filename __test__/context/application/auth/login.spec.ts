@@ -17,7 +17,7 @@ import {
 
 test("username with less than 4 characters should fail", async () => {
   const getLogin = emptyGetLoginMock();
-  const [err] = await login({ getLogin })(shortUsernameCommand());
+  const [err] = await login(getLogin)(shortUsernameCommand());
 
   expect(getLogin).not.toBeCalled();
   expect(err).toBe(new UsernameLengthError().message);
@@ -25,7 +25,7 @@ test("username with less than 4 characters should fail", async () => {
 
 test("username without '@' should fail", async () => {
   const getLogin = emptyGetLoginMock();
-  const [err] = await login({ getLogin })(invalidFormatUsernameCommand());
+  const [err] = await login(getLogin)(invalidFormatUsernameCommand());
 
   expect(getLogin).not.toBeCalled();
   expect(err).toBe(new UsernameWrongFormatError().message);
@@ -33,9 +33,7 @@ test("username without '@' should fail", async () => {
 
 test("correct username and pasword, provider fail", async () => {
   const getLogin = errorGetLoginMock();
-  const [err] = await login({
-    getLogin,
-  })(validCommand());
+  const [err] = await login(getLogin)(validCommand());
 
   expect(getLogin).toBeCalled();
   expect(err).toBe(new InvalidUsernameOrPasswordError().message);
@@ -43,9 +41,7 @@ test("correct username and pasword, provider fail", async () => {
 
 test("correct username and pasword, provider success", async () => {
   const getLogin = succesGetLoginMock();
-  const [err, token] = await login({
-    getLogin,
-  })(validCommand());
+  const [err, token] = await login(getLogin)(validCommand());
 
   expect(err).toBeNull();
   expect(getLogin).toBeCalled();
