@@ -48,8 +48,9 @@ The result of our use case must always return a promise, we will use a utility t
 
 ```ts
 import { StoreItem } from "../../domain/useCaseA/StoreItem";
+import { useCase } from "utils"
 
-const useCase = (dependencie: StoreItem) =>
+const useCaseA = (dependencie: StoreItem) =>
   useCase(async (some) => {
     // Do things...
     return Promise.resolve();
@@ -110,7 +111,7 @@ export const shuffle = (deck: Deck): Deck => {
 // DeckRepository.ts
 import { Deck } from "./CardSuit";
 
-export type saveDeck = (deck: Deck) => void;
+export type saveDeck = (deck: Deck) => Promise<void>;
 ```
 
 ### infra
