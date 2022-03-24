@@ -32,7 +32,7 @@
              └── index.tsx
 ```
 
-## Explicacion de cada bloque
+## Explanation of each folder
 
 ### context
 
