@@ -29,7 +29,9 @@ jobs:
       - name: Install dependencies
         run: make install_ci
 
-      - run: ls
+      - run: pwd
+      - run: cd ~/node_modules && ls
+      - run: cd ~/node_modules && pwd
   # build:
   #   name: Build app
   #   needs: install
