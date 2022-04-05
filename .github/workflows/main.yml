@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/node_modules
-          key: ${{ runner.os }}-modules-${{ GITHUB_SHA }}
+          key: ${{ runner.os }}-modules-${{ github.sha }}
 
       - run: ls
 
@@ -68,7 +68,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/node_modules
-          key: ${{ runner.os }}-modules-${{ GITHUB_SHA }}
+          key: ${{ runner.os }}-modules-${{ github.sha }}
 
       - name: Run the typecheck/lint/test
         run: make validate
