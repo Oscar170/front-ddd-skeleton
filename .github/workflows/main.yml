@@ -28,6 +28,7 @@ jobs:
         run: make install_ci
 
   build:
+    name: Install website
     needs: install
     runs-on: ubuntu-latest
 
@@ -41,7 +42,13 @@ jobs:
           path: ~/node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Run the typecheck/lint/test
+      - name: Cache app
+        uses: actions/cache@v3
+        with:
+          path: ~/.next
+          key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Build next app
         run: make build
 
   validate:
@@ -61,3 +68,24 @@ jobs:
 
       - name: Run the typecheck/lint/test
         run: make validate
+
+  deploy:
+    name: Deploy app
+    needs: [build, install]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Cache app
+        uses: actions/cache@v3
+        with:
+          path: ~/.next
+          key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
