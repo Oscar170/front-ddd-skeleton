@@ -66,9 +66,6 @@ jobs:
           path: ~/node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Add permisions, remove on update npm 8.6.0
-        run: sudo chown -R 1001:121 "/root/.npm"
-
       - name: Run the typecheck/lint/test
         run: make validate
 
