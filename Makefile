@@ -2,7 +2,7 @@ current-dir := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 node_image := node:gallium-alpine
 
 install: CMD=npm install
-install_ci: CMD=npm install -g npm@8.6.0 && npm ci
+install_ci: CMD=npx npm@8.6.0 ci
 validate: CMD=npm run validate
 build: CMD=npm run build
 test: CMD=npm run test:ci
