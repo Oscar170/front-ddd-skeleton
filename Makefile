@@ -3,7 +3,7 @@ node_image := node:gallium-alpine
 
 install: CMD=npm install
 install_ci: CMD=npx npm@8.6.0 ci
-validate: CMD=npm run validate
+validate: CMD=npm run typecheck
 build: CMD=npm run build
 test: CMD=npm run test:ci
 
