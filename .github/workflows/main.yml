@@ -1,22 +1,94 @@
-name: Validate Code
+name: CI
 
 on: [push, pull_request]
 
 jobs:
-  validate:
+  install:
+    name: Install node modules
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - name: Cache npm
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
       - name: Install dependencies
         run: make install_ci
 
+  build:
+    name: Build app
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
+      - name: Cache app
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-${{ github.sha }}
+
+      - name: Build next app
+        run: make build
+
+  validate:
+    name: Validate app
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
       - name: Run the typecheck/lint/test
         run: make validate
+
+  deploy:
+    name: Deploy app
+    needs: [build, validate]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
+      - name: Cache app
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-${{ github.sha }}
+
+      - name: Deploy app
+        run: echo "deployed"

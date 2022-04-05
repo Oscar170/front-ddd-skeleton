@@ -4,9 +4,10 @@ node_image := node:gallium-alpine
 install: CMD=npm install
 install_ci: CMD=npm ci
 validate: CMD=npm run validate
+build: CMD=npm run build
 test: CMD=npm run test:ci
 
-node install install_ci validate test:
+node install install_ci validate test build:
 	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \
 		--volume $(current-dir):/app \
 		--volume $(HOME)/.npm:/root/.npm \
