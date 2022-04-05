@@ -24,13 +24,10 @@ jobs:
           path: ~/node_modules
           key: ${{ runner.os }}-modules-${{ github.sha }}
 
-      - run: ls
-
       - name: Install dependencies
         run: make install_ci
 
       - run: ls
-
   # build:
   #   name: Build app
   #   needs: install
@@ -69,6 +66,8 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-modules-${{ github.sha }}
+
+      - run: ls
 
       - name: Run the typecheck/lint/test
         run: make validate
