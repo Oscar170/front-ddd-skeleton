@@ -23,6 +23,8 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-modules-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-modules-${{ github.sha }}
 
       - name: Install dependencies
         run: make install_ci
