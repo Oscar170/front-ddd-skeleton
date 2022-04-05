@@ -27,29 +27,29 @@ jobs:
       - name: Install dependencies
         run: make install_ci
 
-  # build:
-  #   name: Build app
-  #   needs: install
-  #   runs-on: ubuntu-latest
+  build:
+    name: Build app
+    needs: install
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  #     - name: Cache node modules
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: ~/node_modules
-  #         key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
 
-  #     - name: Cache app
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: ~/.next
-  #         key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
+      - name: Cache app
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-${{ github.sha }}
 
-  #     - name: Build next app
-  #       run: make build
+      - name: Build next app
+        run: make build
 
   validate:
     name: Validate app
@@ -66,28 +66,29 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-modules-${{ github.sha }}
 
-      - run: ls
-
       - name: Run the typecheck/lint/test
         run: make validate
 
-  # deploy:
-  #   name: Deploy app
-  #   needs: [build, install]
-  #   runs-on: ubuntu-latest
+  deploy:
+    name: Deploy app
+    needs: [build, install]
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  #     - name: Cache node modules
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: ~/node_modules
-  #         key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
 
-  #     - name: Cache app
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: ~/.next
-  #         key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
+      - name: Cache app
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-${{ github.sha }}
+
+      - name: Deploy app
+        run: echo "deployed"
