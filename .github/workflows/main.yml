@@ -71,7 +71,7 @@ jobs:
 
   deploy:
     name: Deploy app
-    needs: [build, install]
+    needs: [build, validate]
     runs-on: ubuntu-latest
 
     steps:
