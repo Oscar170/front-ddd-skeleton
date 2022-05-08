@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { hasError } from "@/context/shared/useCase";
-import Show from "@/components/utils/Show";
 import { useInput } from "@/hooks/useInput";
 import { useContainer } from "@/hooks/useContainer";
+import Match, { Case } from "@/components/flow/Match";
+import Show from "@/components/flow/Show";
+
+const hasTryLogged = (token: string | undefined, error: boolean) => {
+  return Boolean(token) || error;
+};
 
 const Login: React.FC = () => {
   const container = useContainer();
@@ -54,17 +59,17 @@ const Login: React.FC = () => {
         <button type="submit">LOGIN</button>
       </form>
       <Show
-        when={Boolean(token) || error}
+        when={hasTryLogged(token, error)}
         fallback={<span data-testid="login-waiting">Waiting to login</span>}
       >
-        <Show
-          when={!error}
-          fallback={
+        <Match>
+          <Case when={error}>
             <span data-testid="login-error">Some unexpected error</span>
-          }
-        >
-          <span data-testid="login-success">Token: {token}</span>
-        </Show>
+          </Case>
+          <Case when={!error}>
+            <span data-testid="login-success">Token: {token}</span>
+          </Case>
+        </Match>
       </Show>
     </>
   );

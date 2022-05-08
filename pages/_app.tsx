@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { ContainerProvider } from "@/hooks/useContainer";
 import { container } from "@/context/workflow";
-import ErrorBoundary, { HandleError } from "@/components/utils/ErrorBoundary";
+import ErrorBoundary, { HandleError } from "@/components/flow/ErrorBoundary";
 
 const handleError: HandleError = ({ error, errorInfo }) => {
   console.group("app-ddd-example-ts");
