@@ -1,10 +1,15 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+  pull_request:
 
 jobs:
   install:
-    name: Install node modules
+    name: 🗂 Install dependencies
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,7 +33,7 @@ jobs:
         run: make install_ci
 
   build:
-    name: Build app
+    name: 📦 Build app
     needs: install
     runs-on: ubuntu-latest
 
@@ -51,8 +56,8 @@ jobs:
       - name: Build next app
         run: make build
 
-  validate:
-    name: Validate app
+  lint:
+    name: 💅 Validate format
     needs: install
     runs-on: ubuntu-latest
 
@@ -66,12 +71,48 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-modules-${{ github.sha }}
 
-      - name: Run the typecheck/lint/test
-        run: make validate
+      - name: Run the lint
+        run: make lint
+
+  typecheck:
+    name: 👀 Validate types
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
+      - name: Run the typecheck
+        run: make typecheck
+
+  unitTest:
+    name: ✅ Unit Test
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
+      - name: Run the unit test
+        run: make unit_test
 
   deploy:
-    name: Deploy app
-    needs: [build, validate]
+    name: 🚀 Deploy app
+    needs: [build, lint, typecheck, unitTest]
     runs-on: ubuntu-latest
 
     steps:
