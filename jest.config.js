@@ -23,6 +23,7 @@ const customJestConfig = {
     "^@/sections/(.*)$": "<rootDir>/src/sections/$1",
     "^@/utils/(.*)$": "<rootDir>/src/utils/$1",
   },
+  modulePathIgnorePatterns: ["<rootDir>/cypress/"],
   // setupFiles: ["@testing-library/react"],
 };
 
