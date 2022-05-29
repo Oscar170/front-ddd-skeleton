@@ -3,7 +3,7 @@ node_image := node:gallium-alpine
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=chmod -R 777 /root/.cache && ls -lsa /root/.cache && npm ci
+install_ci: CMD=mkdir /root/.cache && chmod -R 777 /root/.cache && ls -lsa /root/.cache && npm ci
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
@@ -15,7 +15,6 @@ node start install install_ci validate unit_test build lint typecheck:
 	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \
 		--volume $(current-dir):/app \
 		--volume $(HOME)/.npm:/root/.npm \
-		--volume $(HOME)/.cache:/root/.cache \
 		--publish 3000:3000 \
 		$(node_image) \
 			$(CMD)
