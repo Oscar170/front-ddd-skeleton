@@ -3,7 +3,7 @@ node_image := node:gallium-alpine
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=npm ci
+install_ci: CMD=whoami && return 1
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
