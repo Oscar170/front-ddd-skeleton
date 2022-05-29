@@ -3,7 +3,7 @@ node_image := node:gallium-alpine
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD="echo 'List root content' && ls -lsa /root && echo 'Create .chache folder' && mkdir /root/.cache && echo 'List root content' && ls -lsa /root && echo 'List .cache content' && ls -lsa /root/.cache && npm ci"
+install_ci: CMD=/bin/sh -c "echo 'List root content' && ls -lsa /root && echo 'Create .chache folder' && mkdir /root/.cache && echo 'List root content' && ls -lsa /root && echo 'List .cache content' && ls -lsa /root/.cache && npm ci"
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
