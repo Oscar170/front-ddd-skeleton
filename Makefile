@@ -3,7 +3,7 @@ node_image := node:gallium-alpine
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=ls -lsa /root && ls -lsa /root/.cache && return 1
+install_ci: CMD=chmod -R 777 /root/.cache && ls -lsa /root/.cache && npm ci
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
