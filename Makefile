@@ -3,7 +3,7 @@ node_image := node:16
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=/bin/sh -c "npm_config_loglevel=error npm ci"
+install_ci: CMD=/bin/sh -c "npm_config_loglevel=error npm ci || cat /root/.npm/_logs/*.log"
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
