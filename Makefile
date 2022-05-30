@@ -3,7 +3,7 @@ node_image := node:16
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=/bin/sh -c "CYPRESS_CACHE_FOLDER=/app/.cache/Cypress npm ci"
+install_ci: CMD=/bin/sh -c "npm_config_loglevel=error npm ci"
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
