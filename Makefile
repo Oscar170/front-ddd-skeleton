@@ -3,7 +3,7 @@ node_image := node:16
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=npm ci
+install_ci: CMD=/bin/sh -c "mkdir /root/.cache && chmod -R 777 /root/.cache && npm ci"
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
