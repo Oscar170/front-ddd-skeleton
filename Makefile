@@ -3,7 +3,7 @@ node_image := node:16
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=CYPRESS_INSTALL_BINARY=0 npm ci
+install_ci: CMD=/bin/sh -c "CYPRESS_INSTALL_BINARY=0 npm ci"
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
