@@ -15,7 +15,7 @@ node start install install_ci validate unit_test build lint typecheck:
 	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \
 		--volume $(current-dir):/app \
 		--volume $(HOME)/.npm:/root/.npm \
-		--volume $(HOME)/.cache:/root/.cache \
+		--volume $(HOME)/.cache/Cypress:/root/.cache/Cypress \
 		--publish 3000:3000 \
 		$(node_image) \
 			$(CMD)
