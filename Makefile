@@ -3,7 +3,7 @@ node_image := node:16
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=/bin/sh -c "chmod -R 777 /root/.cache && npm ci"
+install_ci: CMD=npm ci
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
@@ -12,10 +12,10 @@ build: CMD=npm run build
 unit_test: CMD=npm run test:ci
 
 node start install install_ci validate unit_test build lint typecheck:
-	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \
+	@docker run --rm --interactive --workdir /app \
 		--volume $(current-dir):/app \
 		--volume $(HOME)/.npm:/root/.npm \
-		--volume $(HOME)/.cache/Cypress:/root/.cache/Cypress \
+		--volume $(HOME)/.cache:/root/.cache \
 		--publish 3000:3000 \
 		$(node_image) \
 			$(CMD)
