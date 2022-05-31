@@ -3,7 +3,7 @@ node_image := node:16
 
 start: CMD=npm run dev
 install: CMD=npm install
-install_ci: CMD=/bin/sh -c "npm_config_loglevel=error npm ci || cat /root/.npm/_logs/*.log"
+install_ci: CMD=/bin/sh -c "chmod -R 777 /root/.cache && npm ci"
 validate: CMD=npm run validate
 lint: CMD=npm run lint
 typecheck: CMD=npm run typecheck
@@ -15,7 +15,7 @@ node start install install_ci validate unit_test build lint typecheck:
 	@docker run --rm --interactive --workdir /app --user $(id -u):$(id -g) \
 		--volume $(current-dir):/app \
 		--volume $(HOME)/.npm:/root/.npm \
-		--volume $(HOME)/.cache:/app/.cache \
+		--volume $(HOME)/.cache:/root/.cache \
 		--publish 3000:3000 \
 		$(node_image) \
 			$(CMD)
