@@ -110,6 +110,28 @@ jobs:
       - name: Run the unit test
         run: make unit_test
 
+  e2eTest:
+    name: 🌎 e2e Test
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ github.sha }}
+
+      - name: Run the e2e
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: make start
+          wait-on: "http://localhost:3000"
+
   deploy:
     name: 🚀 Deploy app
     needs: [build, lint, typecheck, unitTest]
